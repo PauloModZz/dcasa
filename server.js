@@ -1,17 +1,19 @@
-const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const conectarDB = require('./conectarDB');
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+const conectarDB = require("./database/conexion");
 
 const app = express();
-dotenv.config();
+
+// Conectar a la base de datos
 conectarDB();
 
 app.use(cors());
 app.use(express.json());
 
-// Rutas
-app.use('/api/pedidos', require('./routes/pedidos'));
+app.get("/", (req, res) => {
+  res.send("Servidor funcionando con MongoDB Atlas.");
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
